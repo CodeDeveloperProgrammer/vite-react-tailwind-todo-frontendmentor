@@ -127,8 +127,7 @@ const App = () => {
 
             <footer className="container mx-auto mt-8 px-4 dark:text-gray-400 md:max-w-xl">
                 <div className="flex justify-center gap-4 rounded-md bg-white p-4 transition-all duration-700 dark:bg-gray-800">
-                    <h2>POR HACER</h2>
-                    Drag and drop to reorder list
+                    <h2>By Ramón</h2>
                 </div>
             </footer>
         </div>
