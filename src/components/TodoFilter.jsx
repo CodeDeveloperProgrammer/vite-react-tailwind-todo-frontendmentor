@@ -1,12 +1,12 @@
 const TodoFilter = ({ changeFilter, filter }) => {
     return (
         <section className="container mx-auto mt-8">
-            <div className=" flex justify-center gap-4 rounded-md bg-white p-4">
+            <div className="flex justify-center gap-4 rounded-md bg-white p-4 transition-all duration-700 dark:bg-gray-800">
                 <button
                     className={`${
-                        filter === "all" 
-                        ? "text-blue-600 hover:text-gray-500" 
-                        : "text-gray-400 hover:text-blue-600"
+                        filter === "all"
+                            ? "text-blue-600 hover:text-gray-500"
+                            : "text-gray-400 hover:text-blue-600"
                     }`}
                     onClick={() => changeFilter("all")}
                 >
@@ -14,9 +14,9 @@ const TodoFilter = ({ changeFilter, filter }) => {
                 </button>
                 <button
                     className={`${
-                        filter === "active" 
-                        ? "text-blue-600 hover:text-gray-500" 
-                        : "text-gray-400 hover:text-blue-600"
+                        filter === "active"
+                            ? "text-blue-600 hover:text-gray-500"
+                            : "text-gray-400 hover:text-blue-600"
                     }`}
                     onClick={() => changeFilter("active")}
                 >
@@ -24,9 +24,9 @@ const TodoFilter = ({ changeFilter, filter }) => {
                 </button>
                 <button
                     className={`${
-                        filter === "completed" 
-                        ? "text-blue-600 hover:text-gray-500" 
-                        : "text-gray-400 hover:text-blue-600"
+                        filter === "completed"
+                            ? "text-blue-600 hover:text-gray-500"
+                            : "text-gray-400 hover:text-blue-600"
                     }`}
                     onClick={() => changeFilter("completed")}
                 >

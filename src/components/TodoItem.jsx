@@ -5,7 +5,7 @@ const TodoItem = ({ todo, updateTodo, removeTodo }) => {
     const { id, title, completed } = todo;
 
     return (
-        <article className="flex gap-4 border-b border-b-gray-400 py-4">
+        <article className="flex gap-4 border-b border-b-gray-400 transition-all duration-700">
             {/* <button className=" inline-block h-5 w-5 flex-none rounded-full border-2 bg-gradient-to-r from-fuchsia-500 to-cyan-500">
             </button> */}
 
@@ -27,7 +27,7 @@ const TodoItem = ({ todo, updateTodo, removeTodo }) => {
             </button>
 
             <p
-                className={`"grow text-gray-600" ${
+                className={`grow text-gray-600 transition-all duration-700 dark:text-gray-400 ${
                     completed && "line-through"
                 }`}
             >

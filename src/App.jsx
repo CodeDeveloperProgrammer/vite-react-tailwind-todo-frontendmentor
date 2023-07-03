@@ -73,7 +73,7 @@ const App = () => {
 
     return (
         /* vite-react-tailwindcss */
-        <div className="min-h-screen bg-gray-300 bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat">
+        <div className="transition-all duration-700 dark:bg-gray-900 min-h-screen bg-gray-300 bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat dark:bg-[url('./assets/images/bg-mobile-dark.jpg')] ">
             <Header />
 
             <main className="container mx-auto mt-8 px-4">
@@ -95,8 +95,8 @@ const App = () => {
                 changeFilter={changeFilter} filter={filter} />
             </main>
 
-            <footer className="container mx-auto mt-8 px-4">
-                <div className="flex justify-center gap-4 rounded-md bg-white p-4">
+            <footer className="dark:text-gray-400 container mx-auto mt-8 px-4">
+                <div className="transition-all duration-700 flex justify-center gap-4 rounded-md bg-white p-4 dark:bg-gray-800">
                     <h2>POR HACER</h2>
                     Drag and drop to reorder list
                 </div>
