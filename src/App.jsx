@@ -3,18 +3,23 @@ import TodoCreate from "./components/TodoCreate";
 import TodoList from "./components/TodoList";
 import TodoComputed from "./components/TodoComputed";
 import TodoFilter from "./components/TodoFilter";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const initialStateTodos = [
+/* const initialStateTodos = [
     { id: 1, title: "Go to the way", completed: true },
     { id: 2, title: "Learn React", completed: false },
     { id: 3, title: "Learn Vite", completed: false },
     { id: 4, title: "Go to the gym", completed: true },
     { id: 5, title: "Learn Tailwindcss", completed: false },
-];
+]; */
+const initialStateTodos = JSON.parse(localStorage.getItem("todos")) || [];
 
 const App = () => {
     const [todos, setTodos] = useState(initialStateTodos);
+
+    useEffect(() => {
+        localStorage.setItem("todos", JSON.stringify(todos));
+    }, [todos]);
 
     const createTodo = (title) => {
         const newTodo = {
@@ -73,10 +78,10 @@ const App = () => {
 
     return (
         /* vite-react-tailwindcss */
-        <div className="transition-all duration-700 dark:bg-gray-900 min-h-screen bg-gray-300 bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat dark:bg-[url('./assets/images/bg-mobile-dark.jpg')] ">
+        <div className="min-h-screen bg-gray-300 bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat transition-all duration-700 dark:bg-gray-900 dark:bg-[url('./assets/images/bg-mobile-dark.jpg')] md:bg-[url('./assets/images/bg-desktop-light.jpg')] md:dark:bg-[url('./assets/images/bg-desktop-dark.jpg')]">
             <Header />
 
-            <main className="container mx-auto mt-8 px-4">
+            <main className="md:max-w-xl container mx-auto mt-8 px-4">
                 <TodoCreate createTodo={createTodo} />
 
                 <TodoList
@@ -91,12 +96,11 @@ const App = () => {
                     clearCompleted={clearCompleted}
                 />
 
-                <TodoFilter 
-                changeFilter={changeFilter} filter={filter} />
+                <TodoFilter changeFilter={changeFilter} filter={filter} />
             </main>
 
-            <footer className="dark:text-gray-400 container mx-auto mt-8 px-4">
-                <div className="transition-all duration-700 flex justify-center gap-4 rounded-md bg-white p-4 dark:bg-gray-800">
+            <footer className="md:max-w-xl container mx-auto mt-8 px-4 dark:text-gray-400">
+                <div className="flex justify-center gap-4 rounded-md bg-white p-4 transition-all duration-700 dark:bg-gray-800">
                     <h2>POR HACER</h2>
                     Drag and drop to reorder list
                 </div>

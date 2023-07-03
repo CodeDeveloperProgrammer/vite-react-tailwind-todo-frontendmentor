@@ -17,9 +17,9 @@ const Header = () => {
     }, [darkMode]);
 
     return (
-        <header className="container mx-auto px-4 pt-8 transition-all duration-700">
+        <header className="container mx-auto px-4 pt-8 transition-all duration-700 md:max-w-xl">
             <div className="flex justify-between transition-all duration-700">
-                <h1 className="transition-all duration-700 text-3xl font-semibold uppercase tracking-widest text-white">
+                <h1 className="text-3xl font-semibold uppercase tracking-widest text-white transition-all duration-700">
                     todo
                 </h1>
                 <button onClick={() => setDarkMode(!darkMode)}>
