@@ -1,5 +1,4 @@
-const IconCheck = ({...props}) => {
-
+const IconCheck = ({ ...props }) => {
     return (
         <svg
             {...props}

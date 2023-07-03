@@ -1,3 +1,5 @@
+import { DragDropContext } from "@hello-pangea/dnd";
+
 import Header from "./components/Header";
 import TodoCreate from "./components/TodoCreate";
 import TodoList from "./components/TodoList";
@@ -12,7 +14,16 @@ import { useEffect, useState } from "react";
     { id: 4, title: "Go to the gym", completed: true },
     { id: 5, title: "Learn Tailwindcss", completed: false },
 ]; */
+
 const initialStateTodos = JSON.parse(localStorage.getItem("todos")) || [];
+
+const reorder = (list, startIndex, endIndex) => {
+    const result = [...list];
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+
+    return result;
+};
 
 const App = () => {
     const [todos, setTodos] = useState(initialStateTodos);
@@ -76,21 +87,36 @@ const App = () => {
         }
     };
 
+    const handleDragEnd = (result) => {
+        const { destination, source } = result;
+        if (!destination) return;
+        if (
+            source.index === destination.index &&
+            source.droppableId === destination.droppableId
+        )
+            return;
+
+        setTodos((prevTasks) =>
+            reorder(prevTasks, source.index, destination.index)
+        );
+    };
+
     return (
         /* vite-react-tailwindcss */
         <div className="min-h-screen bg-gray-300 bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat transition-all duration-700 dark:bg-gray-900 dark:bg-[url('./assets/images/bg-mobile-dark.jpg')] md:bg-[url('./assets/images/bg-desktop-light.jpg')] md:dark:bg-[url('./assets/images/bg-desktop-dark.jpg')]">
             <Header />
 
-            <main className="md:max-w-xl container mx-auto mt-8 px-4">
+            <main className="container mx-auto mt-8 px-4 md:max-w-xl">
                 <TodoCreate createTodo={createTodo} />
 
-                <TodoList
-                    /* todos={todos} Ahora ya le paso los todos filtrados según el estado del filter */
-                    todos={filteredTodos()}
-                    updateTodo={updateTodo}
-                    removeTodo={removeTodo}
-                />
-
+                <DragDropContext onDragEnd={handleDragEnd}>
+                    <TodoList
+                        /* todos={todos} Ahora ya le paso los todos filtrados según el estado del filter */
+                        todos={filteredTodos()}
+                        updateTodo={updateTodo}
+                        removeTodo={removeTodo}
+                    />
+                </DragDropContext>
                 <TodoComputed
                     computedItemsLeft={computedItemsLeft}
                     clearCompleted={clearCompleted}
@@ -99,7 +125,7 @@ const App = () => {
                 <TodoFilter changeFilter={changeFilter} filter={filter} />
             </main>
 
-            <footer className="md:max-w-xl container mx-auto mt-8 px-4 dark:text-gray-400">
+            <footer className="container mx-auto mt-8 px-4 dark:text-gray-400 md:max-w-xl">
                 <div className="flex justify-center gap-4 rounded-md bg-white p-4 transition-all duration-700 dark:bg-gray-800">
                     <h2>POR HACER</h2>
                     Drag and drop to reorder list
